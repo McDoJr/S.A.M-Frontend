@@ -42,7 +42,7 @@ const SettingsBookings = () => {
                 <div className={styles.left}>
                     <span onClick={() => navigate("/settings/personal-information")}>Settings</span>
                     <span onClick={() => navigate("/settings/address")}>Address</span>
-                    <span>Bookings <FaCaretLeft className="w-[50px] h-[50px] text-white absolute top-[3px] right-[-80px]"/></span>
+                    <span>Bookings <FaCaretLeft className="w-[50px] h-[50px] text-white absolute top-[3px] right-[-95px]"/></span>
                 </div>
                 <div className={styles.right}>
                     <h3>BOOKINGS</h3>
