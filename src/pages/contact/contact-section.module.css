@@ -1,0 +1,162 @@
+.container {
+    width: 100%;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color: #ffffff;
+    position: relative;
+}
+
+.container h1 {
+    font-family: var(--heading-text);
+    font-size: 90px;
+    font-weight: 400;
+    letter-spacing: .2rem;
+    color: var(--primary-color);
+    margin-bottom: 50px;
+}
+
+.box {
+    width: 100%;
+    display: grid;
+    overflow: hidden;
+    grid-template-rows: minmax(100%, auto);
+    grid-template-columns: minmax(50%, auto) minmax(50%, auto);
+    justify-content: space-between;
+}
+
+.left {
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.left div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.left div img {
+    width: 50px;
+    height: 50px;
+}
+
+.left div span {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.left div:last-child span:last-child {
+    margin-top: 10px;
+    font-weight: 800;
+}
+
+.form {
+    grid-area: 1 / 2 / 2 / 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+.form input::-webkit-inner-spin-button,
+.form input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.form label {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 20px 0 5px 0;
+}
+
+.form label:first-child {
+    margin-top: 0;
+}
+
+.form input {
+    font-size: 14px;
+    padding: 10px;
+    outline: none;
+    border: none;
+}
+
+.form textarea {
+    font-size: 18px;
+    padding: 10px;
+    outline: none;
+    border: none;
+    min-height: 200px;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.form button {
+    margin-top: 20px;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    background-color: #000000;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.container h2 {
+    margin-top: 100px;
+    align-self: end;
+    font-size: 30px;
+}
+
+.submit {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, .8);
+}
+
+.submit div {
+    display: flex;
+    width: 450px;
+    height: 300px;
+    border: 1px solid #ffffff;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #D9D9D9;
+    position: relative;
+}
+
+.submit div p {
+    position: absolute;
+    top: -17px;
+    right: 0;
+    font-size: 50px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.submit .icon {
+    width: 40px;
+    height: 40px;
+}
+
+.submit span {
+    margin-top: 30px;
+    font-size: 30px;
+}

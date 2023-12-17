@@ -1,0 +1,26 @@
+.container {
+    width: 100%;
+    padding-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+}
+
+.container h1 {
+    margin-top: 50px;
+    font-family: var(--heading-text);
+    color: var(--primary-color);
+    font-size: 90px;
+    font-weight: 400;
+    letter-spacing: .1rem;
+}
+
+.box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}

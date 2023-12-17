@@ -1,0 +1,23 @@
+.icon {
+    width: 25px;
+    height: 25px;
+    color: #ffffff;
+    background-color: #000000;
+    padding: 10px 9px;
+    border-radius: 50%;
+    position: fixed;
+    right: 50px;
+    bottom: 80px;
+    display: none;
+    opacity: 0;
+    transition: all .3s ease;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.icon.active {
+    pointer-events: auto;
+    display: block;
+    opacity: 1;
+    bottom: 50px;
+}

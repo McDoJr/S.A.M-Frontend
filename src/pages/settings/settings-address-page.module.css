@@ -1,0 +1,84 @@
+.container {
+    width: 100%;
+    display: grid;
+    overflow: hidden;
+    grid-template-rows: minmax(100%, auto);
+    grid-template-columns: 220px calc(100% - 220px);
+}
+
+.form h3:last-of-type {
+    margin-top: 30px;
+}
+
+.left {
+    width: 220px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 50px 70px;
+    background-color: #d4d4d4;
+}
+
+.left span {
+    font-family: var(--heading-text);
+    font-size: 40px;
+    font-weight: 400;
+    position: relative;
+    cursor: pointer;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    color: #ffffff;
+    position: absolute;
+    top: 3px;
+    right: -95px;
+}
+
+.form {
+    width: 100%;
+    padding: 60px 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.top {
+    padding: 10px 0 50px 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-bottom: 2px solid #000000;
+}
+
+.top .field:first-child {
+    width: 100%;
+}
+
+.top .field{
+    margin-top: 20px;
+    width: calc((100% / 4) - 10px);
+    display: flex;
+    flex-direction: column;
+}
+
+.top .field label {
+    font-family: var(--heading-text);
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.form button {
+    margin-top: 50px;
+    font-family: var(--heading-text);
+    font-size: 30px;
+    font-weight: 400;
+    padding: 12px 60px 7px 60px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 30px;
+}
