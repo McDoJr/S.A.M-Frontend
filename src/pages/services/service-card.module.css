@@ -20,7 +20,6 @@
     height: 100px;
     display: flex;
     flex-direction: column;
-    align-items: start;
     justify-content: space-between;
     background-color: var(--primary-color);
 }

@@ -40,11 +40,8 @@
 .right {
     width: 50%;
     height: 100%;
-    /*padding: 20px 150px;*/
     padding: 20px;
     display: flex;
-    /*flex-direction: column;*/
-    align-items: start;
     justify-content: space-between;
 }
 

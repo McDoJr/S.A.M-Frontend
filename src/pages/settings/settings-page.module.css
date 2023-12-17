@@ -15,7 +15,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     padding: 50px 70px;
     background-color: #d4d4d4;
 }
@@ -42,7 +42,7 @@
     padding: 60px 70px;
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
 }
 
 .top {
