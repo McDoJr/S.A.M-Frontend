@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/src/pages/about-page.jsx",
+      "destination": "/about"
+    }
+  ]
+}
