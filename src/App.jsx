@@ -25,60 +25,60 @@ import BookingPaymentPage from "./pages/booking/booking-payment-page.jsx";
 
 const App = () => {
     const [user, setUser] = useState({});
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const cookies = new Cookies();
 
-    // useEffect(() => {
-    //     const token = cookies.get("token");
-    //     // if token exist in cookies, then load the existing user
-    //     if(token) {
-    //         // Set the loading state to true, so it will render the loading animation while waiting for the data
-    //         // to be fetched from the database
-    //         setLoading(true);
-    //         // Decode the token and get the user's id
-    //         const {id} = jwtDecode(token);
-    //         // Get existing user's data from the database
-    //         axios.get(`${DEFAULT_URL}/api/users/${id}`,
-    //             {
-    //                 headers: {
-    //                     Authorization: `Bearer ${token}`,
-    //                 },
-    //             })
-    //             .then(res => {
-    //                 // When successful
-    //                 const user = createUserObject({...res.data, token});
-    //                 const url = `${DEFAULT_URL}/api/bookings?filters[user_id][$eq]=${user.id}&pagination[page]=1&pagination[pageSize]=1000`;
-    //                 axios.get(url,
-    //                     {
-    //                         headers: {
-    //                             Authorization: `Bearer ${token}`,
-    //                         },
-    //                     })
-    //                     .then(res => {
-    //                         if(!res.data.data) {
-    //                             setUser(user);
-    //                             setLoading(false);
-    //                             return
-    //                         }
-    //                         const bookings = res.data.data.reduce((list, data) => {
-    //                             const booking = createBookingObject({...data.attributes, id: data.id});
-    //                             list.push(booking);
-    //                             return list;
-    //                         }, []);
-    //                         setUser({...user, bookings});
-    //                         setLoading(false);
-    //                     }).catch(error => {
-    //                         console.log(error);
-    //                         setLoading(false);
-    //                     })
-    //             })
-    //             .catch(error => {
-    //                 // When failure
-    //                 console.log(error);
-    //                 setLoading(false);
-    //             });
-    //     }
-    // }, []);
+    useEffect(() => {
+        const token = cookies.get("token");
+        // if token exist in cookies, then load the existing user
+        if(token) {
+            // Set the loading state to true, so it will render the loading animation while waiting for the data
+            // to be fetched from the database
+            setLoading(true);
+            // Decode the token and get the user's id
+            const {id} = jwtDecode(token);
+            // Get existing user's data from the database
+            axios.get(`${DEFAULT_URL}/api/users/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                .then(res => {
+                    // When successful
+                    const user = createUserObject({...res.data, token});
+                    const url = `${DEFAULT_URL}/api/bookings?filters[user_id][$eq]=${user.id}&pagination[page]=1&pagination[pageSize]=1000`;
+                    axios.get(url,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                            },
+                        })
+                        .then(res => {
+                            if(!res.data.data) {
+                                setUser(user);
+                                setLoading(false);
+                                return
+                            }
+                            const bookings = res.data.data.reduce((list, data) => {
+                                const booking = createBookingObject({...data.attributes, id: data.id});
+                                list.push(booking);
+                                return list;
+                            }, []);
+                            setUser({...user, bookings});
+                            setLoading(false);
+                        }).catch(error => {
+                            console.log(error);
+                            setLoading(false);
+                        })
+                })
+                .catch(error => {
+                    // When failure
+                    console.log(error);
+                    setLoading(false);
+                });
+        }
+    }, []);
 
     // If token exist in cookies, then render loading state while waiting for the user data to be loaded from database
     if(loading) {
