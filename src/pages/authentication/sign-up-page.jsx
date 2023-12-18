@@ -87,7 +87,7 @@ const SignUpPage = () => {
             {loading && <div className="fixed top-0 left-0 w-full h-screen bg-black/95 flex justify-center items-center">
                 <div className="loader"></div>
             </div>}
-            {success && <Success message="Registraion Success!"/>}
+            {success && <Success message="Registration Success!"/>}
             {failed && <Failed message="Registration Failed!"/>}
         </>
     )
