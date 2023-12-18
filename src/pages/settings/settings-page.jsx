@@ -10,6 +10,7 @@ import {createUserObject, DEFAULT_URL} from "../../utils/data.js";
 import ScrollTop from "../../components/scroll-top.jsx";
 import Success from "../../components/success.jsx";
 import Failed from "../../components/failed.jsx";
+import {scrollToTop, setPageTitle} from "../../utils/utils.jsx";
 
 const SettingsPage = () => {
 
@@ -19,6 +20,11 @@ const SettingsPage = () => {
     const [formData, setFormData] = useState({});
     const [success, setSuccess] = useState(false);
     const [failed, setFailed] = useState(false);
+
+    useEffect(() => {
+        setPageTitle("Settings");
+        scrollToTop();
+    }, []);
 
     useEffect(() => {
         setFormData({...JSON.parse(JSON.stringify(user)),

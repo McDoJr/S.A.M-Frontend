@@ -7,6 +7,7 @@ import {useContext, useEffect, useState} from "react";
 import {DataContext} from "../context.js";
 import axios from "axios";
 import {DEFAULT_URL} from "../../utils/data.js";
+import {scrollToTop, setPageTitle} from "../../utils/utils.jsx";
 
 const SettingsAddressPage = () => {
 
@@ -14,6 +15,11 @@ const SettingsAddressPage = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({});
+
+    useEffect(() => {
+        setPageTitle("Settings - Address");
+        scrollToTop();
+    }, []);
 
     useEffect(() => {
         setFormData(JSON.parse(JSON.stringify(user)));

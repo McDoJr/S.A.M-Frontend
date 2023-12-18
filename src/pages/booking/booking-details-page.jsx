@@ -21,7 +21,7 @@ const BookingDetailsPage = () => {
     const [formData, setFormData] = useState({address: "", city: "", state: "", zip_code: "", country: ""});
 
     useEffect(() => {
-        setPageTitle("Booking Details");
+        setPageTitle("Booking - Details");
         scrollToTop();
     }, []);
 

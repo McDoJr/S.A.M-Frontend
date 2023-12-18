@@ -17,7 +17,7 @@ const BookingPaymentPage = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setPageTitle("Booking Payment");
+        setPageTitle("Booking - Payment");
         scrollToTop();
     }, []);
 
