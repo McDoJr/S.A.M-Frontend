@@ -8,6 +8,8 @@ import {DataContext} from "../context.js";
 import axios from "axios";
 import {DEFAULT_URL} from "../../utils/data.js";
 import {scrollToTop, setPageTitle} from "../../utils/utils.jsx";
+import Success from "../../components/success.jsx";
+import Failed from "../../components/failed.jsx";
 
 const SettingsAddressPage = () => {
 
@@ -15,6 +17,8 @@ const SettingsAddressPage = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({});
+    const [success, setSuccess] = useState(false);
+    const [failed, setFailed] = useState(false);
 
     useEffect(() => {
         setPageTitle("Settings - Address");
@@ -24,6 +28,15 @@ const SettingsAddressPage = () => {
     useEffect(() => {
         setFormData(JSON.parse(JSON.stringify(user)));
     }, [user]);
+
+    const triggerSuccess = () => {
+        setSuccess(true);
+        setTimeout(() => setSuccess(false), 1000);
+    }
+    const triggerFailed = () => {
+        setFailed(true);
+        setTimeout(() => setFailed(false), 1000);
+    }
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -44,10 +57,12 @@ const SettingsAddressPage = () => {
                 .then(() => {
                     setUser({...user, address, city, state, zip_code, country});
                     setLoading(false);
+                    triggerSuccess()
                 })
                 .catch(error => {
                     console.log(error);
                     setLoading(false);
+                    triggerFailed()
                 })
         }
     }
@@ -88,10 +103,12 @@ const SettingsAddressPage = () => {
                     <button type="submit">SAVE CHANGES</button>
                 </form>
             </section>
+            <Footer/>
             {loading && <div className="fixed top-0 left-0 w-full h-screen bg-black/95 flex justify-center items-center">
                 <div className="loader"></div>
             </div>}
-            <Footer/>
+            {success && <Success message="Saved Changes"/>}
+            {failed && <Failed message="Failed Changes"/>}
         </>
     )
 }

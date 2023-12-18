@@ -8,6 +8,8 @@ import axios from "axios";
 import {createBookingObject, DEFAULT_URL} from "../../utils/data.js";
 import {useContext, useEffect, useState} from "react";
 import {DataContext} from "../context.js";
+import Success from "../../components/success.jsx";
+import Failed from "../../components/failed.jsx";
 
 const BookingPaymentPage = () => {
 
@@ -15,11 +17,25 @@ const BookingPaymentPage = () => {
     const navigate = useNavigate();
     const {user, setUser} = useContext(DataContext);
     const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [failed, setFailed] = useState(false);
 
     useEffect(() => {
         setPageTitle("Booking - Payment");
         scrollToTop();
     }, []);
+
+    const triggerSuccess = (callback) => {
+        setSuccess(true);
+        setTimeout(() => {
+            setSuccess(false);
+            callback();
+        }, 1000);
+    }
+    const triggerFailed = () => {
+        setFailed(true);
+        setTimeout(() => setFailed(false), 1000);
+    }
 
     const formData = location.state.formData;
 
@@ -34,11 +50,12 @@ const BookingPaymentPage = () => {
                 const bookings = [...user.bookings, booking];
                 setUser({...user, bookings});
                 setLoading(false);
-                navigate("/");
+                triggerSuccess(() => navigate("/"));
             })
             .catch(error => {
                 console.log(error);
                 setLoading(false);
+                triggerFailed();
             })
     }
 
@@ -77,12 +94,14 @@ const BookingPaymentPage = () => {
                 </div>
             </section>
             <Footer/>
+            <ScrollTop/>
             {loading && (
                 <div className="fixed top-0 left-0 w-full h-screen flex justify-center items-center bg-black/95 z-[100]">
                     <div className="loader"></div>
                 </div>
             )}
-            <ScrollTop/>
+            {success && <Success message="Booking Cancelled"/>}
+            {failed && <Failed message="Cancellation Failed"/>}
         </>
     )
 }
