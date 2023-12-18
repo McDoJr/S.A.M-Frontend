@@ -38,13 +38,28 @@ const App = () => {
             // Decode the token and get the user's id
             const {id} = jwtDecode(token);
             // Get existing user's data from the database
-            axios.get(`${DEFAULT_URL}/api/users/${id}`)
+            axios.get(`${DEFAULT_URL}/api/users/${id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
                 .then(res => {
                     // When successful
                     const user = createUserObject({...res.data, token});
                     const url = `${DEFAULT_URL}/api/bookings?filters[user_id][$eq]=${user.id}&pagination[page]=1&pagination[pageSize]=1000`;
-                    axios.get(url)
+                    axios.get(url,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                            },
+                        })
                         .then(res => {
+                            if(!res.data.data) {
+                                setUser(user);
+                                setLoading(false);
+                                return
+                            }
                             const bookings = res.data.data.reduce((list, data) => {
                                 const booking = createBookingObject({...data.attributes, id: data.id});
                                 list.push(booking);
@@ -78,8 +93,18 @@ const App = () => {
         const {token} = userData;
         const decoded = jwtDecode(token);
         const url = `${DEFAULT_URL}/api/bookings?filters[user_id][$eq]=${userData.id}&pagination[page]=1&pagination[pageSize]=1000`;
-        axios.get(url)
+        axios.get(url,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             .then(res => {
+                if(!res.data.data) {
+                    setUser(userData);
+                    setLoading(false);
+                    return
+                }
                 const bookings = res.data.data.reduce((list, data) => {
                     const booking = createBookingObject({...data.attributes, id: data.id});
                     list.push(booking);

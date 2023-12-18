@@ -6,6 +6,7 @@ import {FaCaretLeft} from "react-icons/fa6";
 import {useContext, useEffect, useState} from "react";
 import {DataContext} from "../context.js";
 import axios from "axios";
+import {DEFAULT_URL} from "../../utils/data.js";
 
 const SettingsAddressPage = () => {
 
@@ -28,7 +29,12 @@ const SettingsAddressPage = () => {
         const {address, city, state, zip_code, country} = formData;
         if(address && city && state && zip_code && country) {
             setLoading(true);
-            axios.put(`http://localhost:1337/api/users/${user.id}`, {address, city, state, zip_code, country})
+            axios.put(`${DEFAULT_URL}/api/users/${user.id}`, {address, city, state, zip_code, country},
+                {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                    },
+                })
                 .then(() => {
                     setUser({...user, address, city, state, zip_code, country});
                     setLoading(false);

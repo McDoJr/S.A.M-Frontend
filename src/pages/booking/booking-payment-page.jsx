@@ -5,7 +5,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {formatString, scrollToTop, setPageTitle} from "../../utils/utils.jsx";
 import ScrollTop from "../../components/scroll-top.jsx";
 import axios from "axios";
-import {createBookingObject} from "../../utils/data.js";
+import {createBookingObject, DEFAULT_URL} from "../../utils/data.js";
 import {useContext, useEffect, useState} from "react";
 import {DataContext} from "../context.js";
 
@@ -27,7 +27,7 @@ const BookingPaymentPage = () => {
 
     const handleSubmit = () => {
         setLoading(true);
-        axios.post(`http://localhost:1337/api/bookings`, {data: formData})
+        axios.post(`${DEFAULT_URL}/api/bookings`, {data: formData})
             .then(res => {
                 const id = res.data.data.id;
                 const booking = createBookingObject({...res.data.data.attributes, id});

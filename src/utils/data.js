@@ -6,4 +6,4 @@ export const createBookingObject = ({id, user_id, service, hours, price, time, d
     return {id, user_id, service, hours, price, time, date, total, aircon_type, quantity, address, city, state, zip_code, country};
 }
 
-export const DEFAULT_URL = "http://localhost:1337";
+export const DEFAULT_URL = "https://sam-strapi.onrender.com";

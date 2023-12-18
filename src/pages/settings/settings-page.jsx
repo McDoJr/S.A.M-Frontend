@@ -46,7 +46,12 @@ const SettingsPage = () => {
         const {username, firstname, lastname} = formData;
         if(username || firstname || lastname) {
             setLoading(true);
-            axios.put(`${DEFAULT_URL}/api/users/${user.id}`, {username, firstname, lastname})
+            axios.put(`${DEFAULT_URL}/api/users/${user.id}`, {username, firstname, lastname},
+                {
+                    headers: {
+                        Authorization: `Bearer ${userData.token}`,
+                    },
+                })
                 .then(() => {
                     setUser({...userData, username, firstname, lastname});
                     setLoading(false);
