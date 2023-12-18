@@ -6,12 +6,28 @@ import {useContext, useState} from "react";
 import axios from "axios";
 import {createUserObject, DEFAULT_URL} from "../../utils/data.js";
 import {DataContext} from "../context.js";
+import Success from "../../components/success.jsx";
+import Failed from "../../components/failed.jsx";
 
 const SignInPage = () => {
     const navigate = useNavigate();
     const {handleLogin} = useContext(DataContext);
     const [formData, setFormData] = useState({email: "", password: ""});
     const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [failed, setFailed] = useState(false);
+
+    const triggerSuccess = (callback) => {
+        setSuccess(true);
+        setTimeout(() => {
+            setSuccess(false);
+            callback();
+        }, 1000);
+    }
+    const triggerFailed = () => {
+        setFailed(true);
+        setTimeout(() => setFailed(false), 1000);
+    }
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -30,10 +46,11 @@ const SignInPage = () => {
                 const {user, jwt} = res.data;
                 handleLogin(createUserObject({...user, token: jwt}));
                 setLoading(false);
-                navigate("/");
+                triggerSuccess(() => navigate("/"));
             }).catch(error => {
                 console.log(error);
                 setLoading(false);
+                triggerFailed();
             })
         }
         setFormData({email: "", password: ""});
@@ -53,10 +70,12 @@ const SignInPage = () => {
                     <span>Don't have an account? <Link to="/signup">Sign Up</Link></span>
                 </form>
             </section>
+            <Footer/>
             {loading && <div className="fixed top-0 left-0 w-full h-screen bg-black/95 flex justify-center items-center">
                 <div className="loader"></div>
             </div>}
-            <Footer/>
+            {success && <Success message="Login Success!"/>}
+            {failed && <Failed message="Login Failed!"/>}
         </>
     )
 }

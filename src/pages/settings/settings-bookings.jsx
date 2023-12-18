@@ -70,12 +70,12 @@ const SettingsBookings = () => {
                     )}
                 </div>
             </section>
+            <Footer/>
             {loading && (
                 <div className="fixed top-0 left-0 w-full h-screen flex justify-center items-center bg-black/95">
                     <div className="loader"></div>
                 </div>
             )}
-            <Footer/>
         </>
     )
 }
