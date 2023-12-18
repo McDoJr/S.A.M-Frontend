@@ -8,17 +8,30 @@ import {FaCaretLeft} from "react-icons/fa6";
 import {DataContext} from "../context.js";
 import axios from "axios";
 import {DEFAULT_URL} from "../../utils/data.js";
+import Success from "../../components/success.jsx";
+import Failed from "../../components/failed.jsx";
 
 const SettingsBookings = () => {
 
     const navigate = useNavigate();
     const {user, setUser} = useContext(DataContext);
     const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [failed, setFailed] = useState(false);
 
     useEffect(() => {
         setPageTitle("Settings - Bookings");
         scrollToTop();
     }, []);
+
+    const triggerSuccess = () => {
+        setSuccess(true);
+        setTimeout(() => setSuccess(false), 1000);
+    }
+    const triggerFailed = () => {
+        setFailed(true);
+        setTimeout(() => setFailed(false), 1000);
+    }
 
     const handleCancel = (id) => {
         setLoading(true);
@@ -27,10 +40,12 @@ const SettingsBookings = () => {
                 const bookings = user.bookings.filter(booking => booking.id !== id);
                 setUser({...user, bookings});
                 setLoading(false);
+                triggerSuccess();
             })
             .catch(error => {
                 console.log(error);
                 setLoading(false);
+                triggerFailed();
             })
     }
 
@@ -76,6 +91,8 @@ const SettingsBookings = () => {
                     <div className="loader"></div>
                 </div>
             )}
+            {success && <Success message="Booking Cancelled"/>}
+            {failed && <Failed message="Cancellation Failed"/>}
         </>
     )
 }

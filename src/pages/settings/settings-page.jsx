@@ -159,12 +159,12 @@ const SettingsPage = () => {
                 </form>
             </section>
             <Footer/>
+            <ScrollTop/>
             {loading && <div className="fixed top-0 left-0 w-full h-screen bg-black/95 flex justify-center items-center z-100">
                 <div className="loader"></div>
             </div>}
             {success && <Success message="Saved Changes"/>}
             {failed && <Failed message="Failed Changes"/>}
-            <ScrollTop/>
         </>
     )
 }
